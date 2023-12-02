@@ -1,3 +1,7 @@
+//Dar ao usuário 4 opções: Cadastro, Login, Excluir cadastro e Finalizar o programa.
+//O usuário pode fazer quantos cadastros quiser e após efetuar um login com um dos nomes e senhas que criou.
+//Após o login, ele pode excluir um dos cadastros, cadastrar mais nomes e finalizar o programa (quando quiser).
+
 let listaNomes = [];
 let listaSenhas = [];
 let opcoes = true;
@@ -7,15 +11,15 @@ let inicio = prompt('Olá, seja bem vindo(a) à Comunidade DoDev. O que você de
  
     switch(inicio) {
         case "1":
-    let nome = prompt('Insira seu nome para cadastro');
-    let senha = prompt('Insira sua senha para cadastro');
+    const nome = prompt('Insira seu nome para cadastro');
+    const senha = prompt('Insira sua senha para cadastro');
         listaNomes.push(nome);
         listaSenhas.push(senha);
         break;
 
         case "2":
-    let loginNome = prompt('Insira seu nome para login:');
-    let loginSenha = prompt('Insira sua senha para login:');
+    const loginNome = prompt('Insira seu nome para login:');
+    const loginSenha = prompt('Insira sua senha para login:');
     let usuarioEncontrado = false;
 
         for(let i = 0; i < listaNomes.length; i++) {
@@ -37,9 +41,9 @@ let inicio = prompt('Olá, seja bem vindo(a) à Comunidade DoDev. O que você de
         break;
 
         case "3":
-            let excluirCadastro = prompt('Insira o nome de usuário que deseja excluir:');
+            const excluirCadastro = prompt('Insira o nome de usuário que deseja excluir:');
 
-            let nomeExcluido = listaNomes.indexOf(excluirCadastro); //".indexOf" => Procurar um índice na "listaNomes" que contenha a string "excluirCadastro"
+            const nomeExcluido = listaNomes.indexOf(excluirCadastro); //".indexOf" => Procurar um índice na "listaNomes" que contenha a string "excluirCadastro"
                                                                    //O ".indexOf" sempre retorna "-1" caso não encontre o elemento escrito dentro dos parênteses "()". Caso encontre, ele me retorna o número da posição que está o elemento "excluirCadastro".
                                                                    //O retorno da função indexOf() eu armazeno na variável "nomeExcluido".
 
