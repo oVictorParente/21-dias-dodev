@@ -1,3 +1,7 @@
+//Criar uma função que pergunte o nome e salário do usuário
+//Essa função retornará uma função que varia de acordo com o valor inserido pelo usuário
+//Dada o nome de "aumentoSalarial()"
+
 function colaborador(){
     nome = prompt('Insira o nome do colaborador');
     salario = Number(prompt('Insira o salário do colaborador'));
@@ -25,6 +29,10 @@ function aumentoSalarial() {
     
     return continuar()
 }
+
+//A função de aumentoSalarial() irá retornar uma outra função que pergunta ao usuário se ele deseja inserir novos valores
+//Caso ele digite "1", essa função retornará a primeira função do código. 
+//Qualquer coisa diferente de "1" encerrará o programa.
 
 function continuar() {
     let novasInformaçoes = prompt('Digite 1 se deseja inserir novas informações')
