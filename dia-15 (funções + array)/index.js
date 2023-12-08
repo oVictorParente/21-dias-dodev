@@ -1,3 +1,7 @@
+//Criar dois arrays já declarados com 10 elementos cada
+//Implementar um função que retorne um terceiro array, apenas com os números que se repetem nos dois arrays anteriores
+//Utilizar um método que não insira o número caso ele se repita apenas dentro do mesmo array e que não tenha números repetidos.
+
 let arrayA = [33, 29, 19, 25, 44, 4, 19, 25, 45, 49];
 let arrayB = [44, 45, 28, 4, 45, 19, 4, 33, 12, 25];
 
