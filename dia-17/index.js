@@ -48,6 +48,68 @@ let arrayHoteis = [];
 let arrayReservas = [];
 
 //2. Funções para cadastrar um hotel ou reserva.
+function cadastrarHotel() {
+
+    //O id do hotel deve ser diferente de outro id já cadastrado.
+    let idHotel = Number(prompt('insira o id do seu hotel'));
+
+        for(let i = 0; i < arrayHoteis.length; i++){
+
+                let idExistente = true
+                while(idExistente) {
+
+                if(arrayHoteis[i].IdHotel === idHotel){
+                    idHotel = Number(prompt('Id já existente! Insira outro id para o seu hotel'));
+
+                } else {
+                    idExistente = false;
+
+                }
+            }
+    }
+
+    const nome = prompt('Insira o nome do seu hotel:');
+    const categoria = prompt('Insira a categoria do hotel');
+    const endereço = prompt('Insira o endereço do hotel');
+    const telefone = Number(prompt('Insira o telefone do hotel'));
+        const novoHotel = new Hotel (idHotel, nome, categoria, endereço, telefone);
+
+    return arrayHoteis.push(novoHotel);
+}
+
+function cadastrarReserva() {
+    let id = 1
+    // Introduzir loop para aumentar o id a cada novo cadastro. //
+
+        console.log("Temos esses hoteis disponíveis:");
+        arrayHoteis.forEach(hotel => console.log(hotel));
+
+    // O id do hotel deve ser um id já cadastrado. //
+    let idHotel = Number(prompt('insira o id do hotel escolhido'));
+
+    const nomeResponsável = prompt('Insira seu nome');
+
+    let diaEntrada = prompt('Digite o dia de entrada no hotel');
+    let diaSaída = prompt('Digite o dia de saída');
+
+        let repetir = true;
+        while(repetir) {
+
+            if(diaEntrada > diaSaída) {
+                alert("O dia de entrada não pode ser depois do dia de saída");
+
+                diaEntrada = prompt('Digite o dia de entrada no hotel');
+                diaSaída = prompt('Digite o dia de saída');
+            } else {
+                repetir = false;
+            }
+        }
+
+    const novaReserva = new Reserva (id, idHotel, nomeResponsável, diaEntrada, diaSaída);
+
+    return arrayReservas.push(novaReserva);
+
+}
 
 
 //Função para localizar as informações do hotel através do Id
@@ -145,7 +207,7 @@ function alterarTelefone(idHotel, novoTelefone) {
 
 
 let reservaUm = new Reserva(456, 123, "victor", "04/12", "14/12");
-let reservaDois = new Reserva(789, 234, "ana", "12/12", "25/12");
+let reservaDois = new Reserva(789, 852, "ana", "12/12", "25/12");
 let reservaTres = new Reserva(546, 234, "victor", "01/04", "24/04");
 
 let hotelUm = new Hotel (123, "Mercury", "luxo", "tatuapé", 12345678);
