@@ -92,20 +92,15 @@ function cadastrarReserva() {
     let diaEntrada = prompt('Digite o dia de entrada no hotel');
     let diaSaída = prompt('Digite o dia de saída');
 
-        let repetir = true;
-        while(repetir) {
+        while(diaEntrada > diaSaída) {
+            alert("O dia de entrada não pode ser depois do dia de saída");
 
-            if(diaEntrada > diaSaída) {
-                alert("O dia de entrada não pode ser depois do dia de saída");
+            diaEntrada = prompt('Digite o dia de entrada no hotel');
+            diaSaída = prompt('Digite o dia de saída');
 
-                diaEntrada = prompt('Digite o dia de entrada no hotel');
-                diaSaída = prompt('Digite o dia de saída');
-            } else {
-                repetir = false;
-            }
         }
 
-    const novaReserva = new Reserva (id, idHotel, nomeResponsável, diaEntrada, diaSaída);
+    let novaReserva = new Reserva (id, idHotel, nomeResponsável, diaEntrada, diaSaída);
 
     return arrayReservas.push(novaReserva);
 
@@ -155,7 +150,7 @@ function reservasHotel(idHotel) {
 //4. Informações da reserva através do Id da reserva.
 function reservasPorId(id) {
 
-    for(let i = 0; i < arrayReservas.length; i++) {
+    for(let i = 0; i < arrayHoteis.length; i++) {
 
         if(arrayReservas[i].Id == id) {
             console.log(informaçoesHotel(arrayReservas[i].IdHotel, 1));
@@ -198,7 +193,11 @@ function alterarTelefone(idHotel, novoTelefone) {
     for(let i = 0; i < arrayHoteis.length; i++){
 
         if(arrayHoteis[i].IdHotel == idHotel) {
+
+            let hotelEncontrado = arrayHoteis[i].Nome;
             arrayHoteis[i].Telefone = novoTelefone;
+
+            console.log(`Telefone do hotel ${hotelEncontrado} alterado para ${novoTelefone}`);
         }
     }
 }
@@ -218,3 +217,67 @@ let hotelTres = new Hotel (963, "Ibis", "basico", "tatuapé", 25797543);
 
 arrayHoteis.push(hotelUm, hotelDois, hotelTres);
 arrayReservas.push(reservaUm, reservaDois, reservaTres);
+
+/////// FLUXO DE FUNCIONAMENTO ////////
+
+let inicio = true
+while(inicio) {
+
+    let opcoes = prompt('Olá, seja bem vindo(a) ao sistema de hotelaria DoDev.\nDigite uma opção: \n1 = Cadastrar Hotel \n2 = Fazer uma Reserva \n3 = Gerenciar Hoteis/Reservas \n4 = Encerrar programa')
+
+        switch(opcoes) {
+            case "1":
+                cadastrarHotel();
+                alert('Hotel cadastrado com sucesso!');
+
+                break;
+
+            case "2":
+                cadastrarReserva();
+                alert('Reserva realizada com sucesso!');
+
+                break;
+
+            case "3":
+                let gerenciar = prompt('Digite uma opção: \n1 = Procurar reserva pelo Id \n2 = Procurar reserva pelo nome do responsável \n3 = Procurar hoteis pela categoria \n4 = Alterar telefone do hotel');
+
+                    switch(gerenciar) {
+                        case "1":
+                            //ERRO//
+                            let idReserva = prompt('Digite o id da sua reserva:');
+                            reservasPorId(idReserva);
+                            
+                            break;
+
+                        case "2":
+                            let nomeReserva = prompt('Digite o nome do responsável pela reserva');
+                            console.log(`Reservas cadastradas em nome de: ${nomeReserva}`);
+                            reservasPorNome(nomeReserva);
+
+                            continue;
+
+                        case "3":
+                            let categoria = prompt('Digite a categoria desejada:');
+                            console.log(`Hoteis cadastrados na categoria: ${categoria}`);
+                            hoteisPorCategoria(categoria);
+                            
+                            continue;
+
+                        case "4":
+                            let idHotel = prompt('Digite o id do hotel que deseja alterar');
+                            let novoTelefone = prompt('Digite o novo telefone do hotel');
+                            alterarTelefone(idHotel, novoTelefone);
+
+                            continue;
+                    }
+
+            case "4":
+                alert('Programa encerrado!');
+                inicio = false;
+
+                break;
+
+            default:
+                alert('Opção inválida!');
+        }
+}
