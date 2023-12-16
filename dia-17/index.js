@@ -1,13 +1,6 @@
 //Sistema simulando criação de hoteis e reservas.
 //Utilizando classes e objetos, switchCase, funções, etc.
 
-//////////////// PENDENCIAS ///////////////////////////
-
-//Introduzir interação ao usuário, para que ele crie hoteis e reservas.
-//Criar um fluxo de funcionamento do código.
-
-///////////////////////////////////////////////////////
-
 //Criando classe de Hotel
 class Hotel {
     IdHotel
@@ -77,9 +70,8 @@ function cadastrarHotel() {
     return arrayHoteis.push(novoHotel);
 }
 
+let idCadastroReserva = 1; //Loop para alterar o id da reserva a cada novo cadastro.
 function cadastrarReserva() {
-    let id = 1
-    // Introduzir loop para aumentar o id a cada novo cadastro. //
 
         console.log("Temos esses hoteis disponíveis:");
         arrayHoteis.forEach(hotel => console.log(hotel));
@@ -100,7 +92,7 @@ function cadastrarReserva() {
 
         }
 
-    let novaReserva = new Reserva (id, idHotel, nomeResponsável, diaEntrada, diaSaída);
+    const novaReserva = new Reserva (idCadastroReserva, idHotel, nomeResponsável, diaEntrada, diaSaída);
 
     return arrayReservas.push(novaReserva);
 
@@ -139,18 +131,23 @@ function reservasHotel(idHotel) {
         if(arrayReservas[i].IdHotel === idHotel) {
 
             console.log(arrayReservas[i]);
+
             console.log(`Nome do hotel: ${informaçoesHotel(idHotel, 1)}`);
+
             console.log(`Nome do responsável: ${arrayReservas[i].NomeResponsável}`);
+
             console.log(`Entrada: ${arrayReservas[i].DiaEntrada}. Saída: ${arrayReservas[i].DiaSaída}`);
+
         }
     }
+    console.log(`////////////////////////////////`);
 }
 
 
 //4. Informações da reserva através do Id da reserva.
 function reservasPorId(id) {
 
-    for(let i = 0; i < arrayHoteis.length; i++) {
+    for(let i = 0; i < arrayReservas.length; i++) {
 
         if(arrayReservas[i].Id == id) {
             console.log(informaçoesHotel(arrayReservas[i].IdHotel, 1));
@@ -158,8 +155,10 @@ function reservasPorId(id) {
             console.log(informaçoesHotel(arrayReservas[i].IdHotel, 3));
 
             console.log(`Entrada: ${arrayReservas[i].DiaEntrada}. Saída: ${arrayReservas[i].DiaSaída}`);
+
         }
     }
+    console.log(`////////////////////////////////`);
 }
 
 
@@ -172,6 +171,7 @@ function reservasPorNome(nome) {
             console.log(arrayReservas[i]);
         }
     }
+    console.log(`////////////////////////////////`);
 }
 
 
@@ -182,8 +182,10 @@ function hoteisPorCategoria(categoria) {
 
         if(arrayHoteis[i].Categoria == categoria) {
             console.log(arrayHoteis[i]);
+
         }
     }
+    console.log(`////////////////////////////////`);
 }
 
 
@@ -200,18 +202,19 @@ function alterarTelefone(idHotel, novoTelefone) {
             console.log(`Telefone do hotel ${hotelEncontrado} alterado para ${novoTelefone}`);
         }
     }
+    console.log(`////////////////////////////////`);
 }
 
 
 
 
-let reservaUm = new Reserva(456, 123, "victor", "04/12", "14/12");
-let reservaDois = new Reserva(789, 852, "ana", "12/12", "25/12");
-let reservaTres = new Reserva(546, 234, "victor", "01/04", "24/04");
+const reservaUm = new Reserva(456, 123, "victor", "04/12", "14/12");
+const reservaDois = new Reserva(789, 852, "ana", "12/12", "25/12");
+const reservaTres = new Reserva(546, 234, "victor", "01/04", "24/04");
 
-let hotelUm = new Hotel (123, "Mercury", "luxo", "tatuapé", 12345678);
-let hotelDois = new Hotel (234, "Melia", "luxo", "carrão", 45678903);
-let hotelTres = new Hotel (963, "Ibis", "basico", "tatuapé", 25797543);
+const hotelUm = new Hotel (123, "Mercury", "luxo", "tatuapé", 12345678);
+const hotelDois = new Hotel (234, "Melia", "luxo", "carrão", 45678903);
+const hotelTres = new Hotel (963, "Ibis", "basico", "tatuapé", 25797543);
 
 
 
@@ -220,7 +223,7 @@ arrayReservas.push(reservaUm, reservaDois, reservaTres);
 
 /////// FLUXO DE FUNCIONAMENTO ////////
 
-let inicio = true
+let inicio = true;
 while(inicio) {
 
     let opcoes = prompt('Olá, seja bem vindo(a) ao sistema de hotelaria DoDev.\nDigite uma opção: \n1 = Cadastrar Hotel \n2 = Fazer uma Reserva \n3 = Gerenciar Hoteis/Reservas \n4 = Encerrar programa')
@@ -228,42 +231,49 @@ while(inicio) {
         switch(opcoes) {
             case "1":
                 cadastrarHotel();
-                alert('Hotel cadastrado com sucesso!');
+                console.log('Hotel cadastrado com sucesso!');
 
                 break;
 
             case "2":
                 cadastrarReserva();
-                alert('Reserva realizada com sucesso!');
+                console.log('Reserva realizada com sucesso!');
+
+                idCadastroReserva++;
 
                 break;
 
             case "3":
-                let gerenciar = prompt('Digite uma opção: \n1 = Procurar reserva pelo Id \n2 = Procurar reserva pelo nome do responsável \n3 = Procurar hoteis pela categoria \n4 = Alterar telefone do hotel');
+                let gerenciar = prompt('Digite uma opção: \n1 = Ver todas as reservas de um hotel \n2 = Procurar reserva pelo Id \n3 = Procurar reserva pelo nome do responsável \n4 = Procurar hoteis pela categoria \n5 = Alterar telefone do hotel');
 
                     switch(gerenciar) {
                         case "1":
-                            //ERRO//
+                            let reservaHotel = Number(prompt('Digite o id do hotel'));
+                            reservasHotel(reservaHotel);
+
+                            continue;
+
+                        case "2":
                             let idReserva = prompt('Digite o id da sua reserva:');
                             reservasPorId(idReserva);
                             
-                            break;
+                            continue;
 
-                        case "2":
+                        case "3":
                             let nomeReserva = prompt('Digite o nome do responsável pela reserva');
                             console.log(`Reservas cadastradas em nome de: ${nomeReserva}`);
                             reservasPorNome(nomeReserva);
 
                             continue;
 
-                        case "3":
+                        case "4":
                             let categoria = prompt('Digite a categoria desejada:');
                             console.log(`Hoteis cadastrados na categoria: ${categoria}`);
                             hoteisPorCategoria(categoria);
                             
                             continue;
 
-                        case "4":
+                        case "5":
                             let idHotel = prompt('Digite o id do hotel que deseja alterar');
                             let novoTelefone = prompt('Digite o novo telefone do hotel');
                             alterarTelefone(idHotel, novoTelefone);
